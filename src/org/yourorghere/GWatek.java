@@ -4,6 +4,7 @@ import com.sun.opengl.util.Animator;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Scanner;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
@@ -29,6 +30,7 @@ public class GWatek implements GLEventListener {
         frame.setSize(640, 480);
         final Animator animator = new Animator(canvas);
         frame.addWindowListener(new WindowAdapter() {
+
 
             @Override
             public void windowClosing(WindowEvent e) {
@@ -81,7 +83,21 @@ public class GWatek implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
-
+    
+    public void createShape(GL gl, float px, float py, float pz , float size) {
+        float kat, x, y;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex3f(px,py,pz); //œrodek
+        for(kat = 0.0f; kat < (2.0f*Math.PI);
+        kat+=(Math.PI/32.0f))
+        {
+        x = size*(float)Math.sin(kat);
+        y = size*(float)Math.cos(kat);
+        gl.glVertex3f(x + px, y + py, pz); //kolejne punkty
+        }
+        gl.glEnd();
+            }
+    
     public void display(GLAutoDrawable drawable) {
 //Tworzenie obiektu
 GL gl = drawable.getGL();
@@ -90,28 +106,7 @@ GL gl = drawable.getGL();
  //Resetowanie macierzy transformacji
  gl.glLoadIdentity();
 
-gl.glBegin(GL.GL_TRIANGLES);
-gl.glColor3f(1.0f,0.0f,0.0f);
-gl.glVertex3f(0.0f, 2.0f, -6.0f);
-gl.glVertex3f(-3.0f,1.0f, -6.0f);
-gl.glVertex3f( 3.0f,1.0f, -6.0f);
-gl.glEnd();
-gl.glBegin(GL.GL_QUADS);
-gl.glColor3f(1.0f,3.0f,0.0f);
-gl.glVertex3f(-3.0f, 1.17f, -7.0f);
-gl.glVertex3f(3.0f,1.17f, -7.0f);
-gl.glVertex3f(3.0f,-1.0f, -7.0f);
-gl.glVertex3f(-3.0f,-1.0f, -7.0f);
-gl.glEnd();
-gl.glBegin(GL.GL_QUADS);
-gl.glColor3f(0.4f,0.2f,0.2f);
-gl.glVertex3f(-2.0f, 0.5f, -7.0f);
-gl.glVertex3f(-1.0f,0.5f, -7.0f);
-gl.glVertex3f(-1.0f,-1.0f, -7.0f);
-gl.glVertex3f(-2.0f,-1.0f, -7.0f);
-gl.glEnd();
-
-
+        createShape(gl,0.5f,0.0f,-1.5f,0.5f);
  //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
  gl.glFlush();
 }
