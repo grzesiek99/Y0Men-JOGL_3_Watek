@@ -4,6 +4,7 @@ import com.sun.opengl.util.Animator;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Random;
 import java.util.Scanner;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -106,6 +107,31 @@ public class GWatek implements GLEventListener {
         gl.glVertex3f(x3,y3, z);
         gl.glEnd(); 
     }
+       
+       public void sierpin(GL gl, float x1, float y1, float x2, float y2, float x3, float y3, int depth )
+{
+    float x12 =( x1 + x2 ) / 2.0f, y12 =( y1 + y2 ) / 2.0f,
+    x13 =( x1 + x3 ) / 2.0f, y13 =( y1 + y3 ) / 2.0f,
+    x23 =( x2 + x3 ) / 2.0f, y23 =( y2 + y3 ) / 2.0f;
+    
+    Random rd = new Random();
+    float c1 = rd.nextFloat();
+    float c2 = rd.nextFloat();
+    float c3 = rd.nextFloat();
+    if( depth == 1 )
+    {
+        gl.glBegin(GL.GL_TRIANGLES );
+        gl.glColor3f(1/depth,1/depth,1/depth);
+        gl.glVertex3f( x1, y1, 5.0f );
+        gl.glVertex3f( x2, y2, 5.0f );
+        gl.glVertex3f( x3, y3, 5.0f );
+        gl.glEnd();
+    }
+    else
+    {
+        sierpin(gl, x1, y1, x12, y12, x13, y13, depth - 1 );
+    }
+}
     
     public void display(GLAutoDrawable drawable) {
 //Tworzenie obiektu
@@ -115,7 +141,7 @@ GL gl = drawable.getGL();
  //Resetowanie macierzy transformacji
  gl.glLoadIdentity();
 
-        createTriangle(gl,-1,0,1,0,0,1,-6);
+        sierpin(gl,1f,1f,-1f,-1f,2f,2f,1);
  //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
  gl.glFlush();
 }
