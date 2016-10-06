@@ -98,6 +98,15 @@ public class GWatek implements GLEventListener {
         gl.glEnd();
             }
     
+       public void createTriangle(GL gl, float x1,float y1,float x2, float y2, float x3, float y3, float z)
+    {
+       gl.glBegin(GL.GL_TRIANGLES);
+        gl.glVertex3f(x1, y1, z);
+        gl.glVertex3f(x2,y2, z);
+        gl.glVertex3f(x3,y3, z);
+        gl.glEnd(); 
+    }
+    
     public void display(GLAutoDrawable drawable) {
 //Tworzenie obiektu
 GL gl = drawable.getGL();
@@ -106,7 +115,7 @@ GL gl = drawable.getGL();
  //Resetowanie macierzy transformacji
  gl.glLoadIdentity();
 
-        createShape(gl,0.5f,0.0f,-1.5f,0.5f);
+        createTriangle(gl,-1,0,1,0,0,1,-6);
  //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
  gl.glFlush();
 }
