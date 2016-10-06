@@ -91,15 +91,24 @@ GL gl = drawable.getGL();
  gl.glLoadIdentity();
 
 gl.glBegin(GL.GL_TRIANGLES);
-gl.glVertex3f(-1.0f, 1.0f, -6.0f);
-gl.glVertex3f(-2.0f,-1.0f, -6.0f);
-gl.glVertex3f( 0.0f,-1.0f, -6.0f);
+gl.glColor3f(1.0f,0.0f,0.0f);
+gl.glVertex3f(0.0f, 2.0f, -6.0f);
+gl.glVertex3f(-3.0f,1.0f, -6.0f);
+gl.glVertex3f( 3.0f,1.0f, -6.0f);
 gl.glEnd();
 gl.glBegin(GL.GL_QUADS);
-gl.glVertex3f(1.0f, 1.0f, -7.0f);
-gl.glVertex3f(2.0f,1.0f, -7.0f);
-gl.glVertex3f(2.0f,-1.0f, -7.0f);
-gl.glVertex3f(1.0f,-1.0f, -7.0f);
+gl.glColor3f(1.0f,3.0f,0.0f);
+gl.glVertex3f(-3.0f, 1.17f, -7.0f);
+gl.glVertex3f(3.0f,1.17f, -7.0f);
+gl.glVertex3f(3.0f,-1.0f, -7.0f);
+gl.glVertex3f(-3.0f,-1.0f, -7.0f);
+gl.glEnd();
+gl.glBegin(GL.GL_QUADS);
+gl.glColor3f(0.4f,0.2f,0.2f);
+gl.glVertex3f(-2.0f, 0.5f, -7.0f);
+gl.glVertex3f(-1.0f,0.5f, -7.0f);
+gl.glVertex3f(-1.0f,-1.0f, -7.0f);
+gl.glVertex3f(-2.0f,-1.0f, -7.0f);
 gl.glEnd();
 
 
