@@ -58,13 +58,13 @@ public class GWalat implements GLEventListener {
             public void keyPressed(KeyEvent e)
             {
                 if(e.getKeyCode() == KeyEvent.VK_UP)
-                xrot -= 1.0f;
+                xrot -= 5.0f;
                 if(e.getKeyCode() == KeyEvent.VK_DOWN)
-                xrot +=1.0f;
+                xrot +=5.0f;
                 if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-                yrot += 1.0f;
+                yrot += 5.0f;
                 if(e.getKeyCode() == KeyEvent.VK_LEFT)
-                yrot -=1.0f;
+                yrot -=5.0f;
             }
             public void keyReleased(KeyEvent e){}
             public void keyTyped(KeyEvent e){}
@@ -173,42 +173,34 @@ GL gl = drawable.getGL();
        // sierpin(gl,1f,1f,-1f,-1f,2f,2f,1);
  //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
  gl.glBegin(GL.GL_QUADS);
-//sciana gorna
-gl.glColor3f(1.0f,0.0f,0.0f);
-gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glVertex3f(-1.0f,1.0f,-1.0f);
-gl.glVertex3f(-1.0f,1.0f,1.0f);
-gl.glVertex3f(1.0f,1.0f,1.0f); 
-//œciana przednia
-gl.glColor3f(1.0f,0.0f,0.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glVertex3f(-1.0f,1.0f,1.0f);
-//sciana tylnia
-gl.glColor3f(0.0f,1.0f,0.0f);
-gl.glVertex3f(-1.0f,1.0f,-1.0f);
-gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-//œciana lewa
-gl.glColor3f(0.0f,0.0f,1.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(-1.0f,1.0f,1.0f);
-gl.glVertex3f(-1.0f,1.0f,-1.0f);
-//œciana prawa
-gl.glColor3f(1.0f,1.0f,0.0f);
-gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
-//œciana dolna
+gl.glBegin(GL.GL_QUADS);
 gl.glColor3f(1.0f,0.0f,1.0f);
 gl.glVertex3f(-1.0f,-1.0f,1.0f);
 gl.glVertex3f(-1.0f,-1.0f,-1.0f);
 gl.glVertex3f(1.0f,-1.0f,-1.0f);
 gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glEnd();
+gl.glBegin(GL.GL_TRIANGLES);
+gl.glColor3f(1.0f,0.0f,0.0f);
+gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glVertex3f(0.0f,1.0f,0.0f);
+
+gl.glColor3f(0.0f,1.0f,0.0f);
+gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glVertex3f(0.0f,1.0f,0.0f);
+
+gl.glColor3f(0.0f,0.0f,1.0f);
+gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glVertex3f(0.0f,1.0f,0.0f);
+
+
+gl.glColor3f(1.0f,1.0f,0.0f);
+gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glVertex3f(0.0f,1.0f,0.0f);
 gl.glEnd();
  
  gl.glFlush();
