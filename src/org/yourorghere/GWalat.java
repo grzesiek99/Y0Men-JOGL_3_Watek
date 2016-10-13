@@ -170,37 +170,46 @@ GL gl = drawable.getGL();
  gl.glTranslatef(0.0f, 0.0f, -6.0f);   //przesuniecie o 6 jednostek
  gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokol osi X
  gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokol osi Y
-       // sierpin(gl,1f,1f,-1f,-1f,2f,2f,1);
+        sierpin(gl,1f,1f,-1f,-1f,2f,2f,1);
  //Wykonanie wszystkich operacji znajduj¹cych siê w buforze
- gl.glBegin(GL.GL_QUADS);
-gl.glBegin(GL.GL_QUADS);
-gl.glColor3f(1.0f,0.0f,1.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glEnd();
-gl.glBegin(GL.GL_TRIANGLES);
-gl.glColor3f(1.0f,0.0f,0.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glVertex3f(0.0f,1.0f,0.0f);
-
+ float x,y,kat;
+gl.glBegin(GL.GL_QUAD_STRIP);
+//gl.glVertex3f(0.0f,0.0f,-6.0f); //?rodek
 gl.glColor3f(0.0f,1.0f,0.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glVertex3f(0.0f,1.0f,0.0f);
+for(kat = 0.0f; kat < (2.0f*Math.PI);
+kat+=(Math.PI/32.0f))
+{
+x = 1.0f*(float)Math.sin(kat);
+y = 1.0f*(float)Math.cos(kat);
+gl.glVertex3f(x, 2.0f, y);
+gl.glVertex3f(x, -2.0f, y);//kolejne punkty
+}
+gl.glEnd();
 
-gl.glColor3f(0.0f,0.0f,1.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(0.0f,1.0f,0.0f);
+float xx,yy,katt;
+gl.glBegin(GL.GL_TRIANGLE_FAN);
+gl.glColor3f(1.0f,1.0f,1.0f);
+//gl.glVertex3f(0.0f,2.0f,0.0f); //?rodek
+for(katt = 0.0f; katt < (2.0f*Math.PI);
+katt+=(Math.PI/32.0f))
+{
+xx = 1.0f*(float)Math.sin(katt);
+yy = 1.0f*(float)Math.cos(katt);
+gl.glVertex3f(xx, 2.0f, yy); //kolejne punkty
+}
+gl.glEnd();
 
-
-gl.glColor3f(1.0f,1.0f,0.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glVertex3f(0.0f,1.0f,0.0f);
+float xxx,yyy,kattt;
+gl.glBegin(GL.GL_TRIANGLE_FAN);
+gl.glColor3f(0.0f,1.1f,1.0f);
+//gl.glVertex3f(0.0f,-2.0f,0.0f); //?rodek
+for(kattt = (float) (2.0f*Math.PI); kattt > 0.0f;
+kattt-=(Math.PI/32.0f))
+{
+xxx = 1.0f*(float)Math.sin(kattt);
+yyy = 1.0f*(float)Math.cos(kattt);
+gl.glVertex3f(xxx, -2.0f, yyy); //kolejne punkty
+}
 gl.glEnd();
  
  gl.glFlush();
