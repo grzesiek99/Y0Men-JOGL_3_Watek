@@ -214,53 +214,56 @@ gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
     public void display(GLAutoDrawable drawable) {
 //Tworzenie obiektu
 GL gl = drawable.getGL();
-//Czyszczenie przestrzeni 3D przed utworzeniem kolejnej klatki
- gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
- //Resetowanie macierzy transformacji
- gl.glLoadIdentity();
+        // Clear the drawing area
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        // Reset the current matrix to the "identity"
+        gl.glLoadIdentity();
+        gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
+        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
+        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
+        //Tu piszemy kod tworz?cy obiekty 3D
+        // Flush all drawing operations to the graphics card
 
- gl.glTranslatef(0.0f, 0.0f, -6.0f);   //przesuniecie o 6 jednostek
- gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokol osi X
- gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokol osi Y
-       // sierpin(gl,1f,1f,-1f,-1f,2f,2f,1);
- //Wykonanie wszystkich operacji znajduj?cych si? w buforze
- 
+        // KOlO 1
+        float x, y, x2, y2, kat, kat2, kat3;
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(0.0f, 0.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 0.0f); //?rodek
+        for (kat = 0.0f; kat < (2.0f * Math.PI);
+                kat += (Math.PI / 32.0f)) {
+            x = 1.0f * (float) Math.sin(kat);
+            y = 1.0f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 0.0f); 
+        }
+        gl.glEnd();
+        // KOlO 2
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(0.0f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 2.0f); //?rodek
+        for (kat2 = (float) (2.0f * Math.PI); kat2 > 0.0f;
+                kat2 -= (Math.PI / 32.0f)) {
+            x = 1.0f * (float) Math.sin(kat2);
+            y = 1.0f * (float) Math.cos(kat2);
+            gl.glVertex3f(x, y, 2.0f);
+        }
+        gl.glEnd();
+        // PROSTOK?TY
+        gl.glBegin(GL.GL_QUAD_STRIP);
+        gl.glColor3f(1.0f, 0.0f, 0.0f);
+        for (kat3 = (float) (2.0f * Math.PI); kat3 > 0.0f;
+                kat3 -= (Math.PI / 32.0f)) {
+            x = 1.0f * (float) Math.sin(kat3);
+            y = 1.0f * (float) Math.cos(kat3);
+            gl.glTexCoord2f(kat3/7,0.0f);
+            gl.glVertex3f(x, y, 2.0f);
+            gl.glTexCoord2f(kat3/7, 1.0f);
+            gl.glVertex3f(x, y, 0.0f);
+        }
+        gl.glEnd();
+        gl.glFlush();
+    }
 
-    gl.glBegin(GL.GL_QUADS);
-gl.glBegin(GL.GL_QUADS);
-gl.glColor3f(1.0f,0.0f,1.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glEnd();
-gl.glBegin(GL.GL_TRIANGLES);
-gl.glColor3f(1.0f,0.0f,0.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(0.5f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
-
-gl.glColor3f(0.0f,1.0f,0.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
-
-gl.glColor3f(0.0f,0.0f,1.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
-
-
-gl.glColor3f(1.0f,1.0f,0.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
-gl.glEnd();
- 
- gl.glFlush();
-}
-
-    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
+    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged,
+            boolean deviceChanged) {
     }
 }
-
