@@ -138,6 +138,9 @@ public class GWalat implements GLEventListener {
  gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
  gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
  gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+ gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
+gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
+
  
 
     }
@@ -232,10 +235,10 @@ gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
 //?ciana przednia
 gl.glColor3f(1.0f,1.0f,0.0f);
 gl.glNormal3f(0.0f, 0.0f, 1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(2.0f, 2.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 2.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
 gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
+gl.glTexCoord2f(2.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
 //sciana tylnia
 gl.glColor3f(0.0f,1.0f,0.0f);
 gl.glNormal3f(1.0f, 0.0f, 1.0f);
@@ -257,9 +260,9 @@ gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
 //?ciana prawa
 gl.glColor3f(1.0f,1.0f,0.0f);
 gl.glNormal3f(0.0f, 0.0f, 1.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 2.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
+gl.glTexCoord2f(2.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
+gl.glTexCoord2f(2.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
 gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
 //?ciana dolna
 gl.glColor3f(1.0f,0.0f,1.0f);
