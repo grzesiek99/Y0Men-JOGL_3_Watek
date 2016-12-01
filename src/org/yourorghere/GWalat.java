@@ -131,7 +131,7 @@ public class GWalat implements GLEventListener {
  t1 = TextureIO.newTexture(image1, false);
  t2 = TextureIO.newTexture(image2, false);
 
- gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE, GL.GL_BLEND | GL.GL_MODULATE);
+ gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE, GL.GL_DECAL | GL.GL_MODULATE);
  gl.glEnable(GL.GL_TEXTURE_2D);
  gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
  gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
@@ -140,6 +140,7 @@ public class GWalat implements GLEventListener {
  gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
  gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
 gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
+
 
  
 
@@ -223,53 +224,37 @@ GL gl = drawable.getGL();
  gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokol osi Y
        // sierpin(gl,1f,1f,-1f,-1f,2f,2f,1);
  //Wykonanie wszystkich operacji znajduj?cych si? w buforze
- gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
- gl.glBegin(GL.GL_QUADS);
-//sciana gorna
-gl.glColor3f(1.0f,0.0f,0.0f);
-gl.glNormal3f(0.0f, 0.0f, 1.0f);
-gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,1.0f); 
-//?ciana przednia
-gl.glColor3f(1.0f,1.0f,0.0f);
-gl.glNormal3f(0.0f, 0.0f, 1.0f);
-gl.glTexCoord2f(2.0f, 2.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(0.0f, 2.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glTexCoord2f(2.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
-//sciana tylnia
-gl.glColor3f(0.0f,1.0f,0.0f);
-gl.glNormal3f(1.0f, 0.0f, 1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
-gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glEnd();
-gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
-gl.glBegin(GL.GL_QUADS);
+ 
 
-//?ciana lewa
-gl.glColor3f(0.0f,0.0f,1.0f);
-gl.glNormal3f(0.0f, 0.0f, 1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
-gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
-//?ciana prawa
-gl.glColor3f(1.0f,1.0f,0.0f);
-gl.glNormal3f(0.0f, 0.0f, 1.0f);
-gl.glTexCoord2f(0.0f, 2.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glTexCoord2f(2.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glTexCoord2f(2.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-//?ciana dolna
+    gl.glBegin(GL.GL_QUADS);
+gl.glBegin(GL.GL_QUADS);
 gl.glColor3f(1.0f,0.0f,1.0f);
 gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
 gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glEnd();
+gl.glBegin(GL.GL_TRIANGLES);
+gl.glColor3f(1.0f,0.0f,0.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.5f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
+
+gl.glColor3f(0.0f,1.0f,0.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
+
+gl.glColor3f(0.0f,0.0f,1.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
+
+
+gl.glColor3f(1.0f,1.0f,0.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(0.0f,1.0f,0.0f);
 gl.glEnd();
  
  gl.glFlush();
